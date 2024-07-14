@@ -1,1 +1,13 @@
-hello dear friend 
+I have th followinng installed in my system
+
+Ubuntu 20.04.6 with ROS noetic
+Pangolin verison 0.9
+Eigen 3.4.90
+OpenCV verison 4.4.0
+pyhthon 3.8.10
+python 2.7.18
+
+
+Packages to install:
+Kalibr
+Allan variance ROS
