@@ -2,7 +2,8 @@ I have th followinng installed in my system
 
 Ubuntu 20.04.6 with ROS noetic
 Pangolin verison 0.9
-Eigen 3.4.90
+Eigen 3.4.90 was giving errors while ./build.sh
+Eigen 3.3.90 was used
 OpenCV verison 4.4.0
 pyhthon 3.8.10
 python 2.7.18
