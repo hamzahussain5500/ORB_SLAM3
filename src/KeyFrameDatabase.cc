@@ -645,8 +645,8 @@ void KeyFrameDatabase::DetectNBestCandidates(KeyFrame *pKF, vector<KeyFrame*> &v
             maxCommonWords=(*lit)->mnPlaceRecognitionWords;
     }
 
-    int minCommonWords = maxCommonWords*0.8f;
-
+    //int minCommonWords = maxCommonWords*0.8f; //reduce the number of common words required
+    int minCommonWords = maxCommonWords*0.7f;
     list<pair<float,KeyFrame*> > lScoreAndMatch;
 
     int nscores=0;

@@ -44,6 +44,10 @@
 
 namespace ORB_SLAM3
 {
+    bool dz_sortKf(KeyFrame* a, KeyFrame* b)
+    {
+        return (a->mnId < b->mnId);
+    }
 bool sortByVal(const pair<MapPoint*, int> &a, const pair<MapPoint*, int> &b)
 {
     return (a.second < b.second);
@@ -392,9 +396,13 @@ void Optimizer::BundleAdjustment(const vector<KeyFrame *> &vpKFs, const vector<M
 void Optimizer::FullInertialBA(Map *pMap, int its, const bool bFixLocal, const long unsigned int nLoopId, bool *pbStopFlag, bool bInit, float priorG, float priorA, Eigen::VectorXd *vSingVal, bool *bHess)
 {
     long unsigned int maxKFid = pMap->GetMaxKFid();
-    const vector<KeyFrame*> vpKFs = pMap->GetAllKeyFrames();
+    //const vector<KeyFrame*> vpKFs = pMap->GetAllKeyFrames();
     const vector<MapPoint*> vpMPs = pMap->GetAllMapPoints();
-
+	//Keyframes to be optimized are sorted by ID number
+    vector<KeyFrame*> tmp_vpKFs = pMap->GetAllKeyFrames();
+    sort(tmp_vpKFs.begin(), tmp_vpKFs.end(), dz_sortKf);
+    const vector<KeyFrame*> vpKFs = tmp_vpKFs;
+    
     // Setup optimizer
     g2o::SparseOptimizer optimizer;
     g2o::BlockSolverX::LinearSolverType * linearSolver;

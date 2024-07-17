@@ -338,7 +338,8 @@ bool LoopClosing::NewDetectCommonRegions()
         mpLastMap = mpCurrentKF->GetMap();
     }
 
-    if(mpLastMap->IsInertial() && !mpLastMap->GetIniertialBA2())
+    //if(mpLastMap->IsInertial() && !mpLastMap->GetIniertialBA2())
+    if(mpLastMap->IsInertial() && !mpLastMap->GetIniertialBA1())
     {
         mpKeyFrameDB->add(mpCurrentKF);
         mpCurrentKF->SetErase();
@@ -393,7 +394,9 @@ bool LoopClosing::NewDetectCommonRegions()
             mvpLoopMatchedMPs = vpMatchedMPs;
 
 
-            mbLoopDetected = mnLoopNumCoincidences >= 3;
+            //mbLoopDetected = mnLoopNumCoincidences >= 3;
+            std::cout << "This time is valid for loopcloure detection~~" << std::endl;
+            mbLoopDetected = mnLoopNumCoincidences >= 2;
             mnLoopNumNotFound = 0;
 
             if(!mbLoopDetected)
@@ -406,7 +409,8 @@ bool LoopClosing::NewDetectCommonRegions()
             bLoopDetectedInKF = false;
 
             mnLoopNumNotFound++;
-            if(mnLoopNumNotFound >= 2)
+            //if(mnLoopNumNotFound >= 2)
+            if(mnLoopNumNotFound >= 3)
             {
                 mpLoopLastCurrentKF->SetErase();
                 mpLoopMatchedKF->SetErase();
@@ -1262,6 +1266,10 @@ void LoopClosing::MergeLocal()
 
     //std::cout << "Merge local, Active map: " << pCurrentMap->GetId() << std::endl;
     //std::cout << "Merge local, Non-Active map: " << pMergeMap->GetId() << std::endl;
+    
+
+
+
 
 #ifdef REGISTER_TIMES
     std::chrono::steady_clock::time_point time_StartMerge = std::chrono::steady_clock::now();
